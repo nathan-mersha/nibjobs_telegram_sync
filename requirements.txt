@@ -1,0 +1,12 @@
+Telethon==1.21.1
+pydantic==1.8.2
+fastapi==0.67.0
+pymongo==3.12.0
+typesense==0.13.0
+psutil==5.8.0
+beautifulsoup4==4.10.0
+Pyrebase==3.0.27
+requests==2.26.0
+googletrans==3.1.0a0
+python-dateutil==2.8.2
+openpyxl==3.0.9
