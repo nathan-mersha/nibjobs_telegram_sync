@@ -12,7 +12,7 @@ pipeline {
                 sh 'sudo nginx -t'
             }
         }
-        
+
         stage('Reload'){
             steps {
                 sh 'sudo service nginx reload'
