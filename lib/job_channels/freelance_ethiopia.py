@@ -20,6 +20,8 @@ class FreeLanceEthiopia(JobChannelMethods):
 
     def extract_job_contract_type(self, message: str):
         matches = re.findall('job type: .*', message.lower())
+        if len(matches) == 0:
+            return "unAvailable"
         return matches[0].replace("job type:", "").strip()
 
     def extract_job_salary(self, message: str):
@@ -68,3 +70,5 @@ class FreeLanceEthiopia(JobChannelMethods):
 
     def extract_job_status_deleted(self, message: str):
         return False
+
+

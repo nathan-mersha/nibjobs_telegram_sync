@@ -8,6 +8,7 @@ class JobModel(BaseModel):
     id: str
     title: str
     category: str  # job category like, accountant, software developer
+    status: Optional[str] = "closed" # job status - closed, opened
     contract_type: Optional[str] = "unAvailable" # full time, contractual, part time and so on
     salary: Optional[str] = "unAvailable"
     available_positions: Optional[int] = 1
@@ -29,6 +30,7 @@ class JobModel(BaseModel):
             id=job_channel_json["id"],
             title=job_channel_json["title"],
             category=job_channel_json["category"],
+            status=job_channel_json["status"],
             contract_type=job_channel_json["contractType"],
             salary=job_channel_json["salary"],
             available_positions=job_channel_json["availablePositions"],
@@ -50,6 +52,7 @@ class JobModel(BaseModel):
             "id": self.id,
             "title": self.title,
             "category": self.category,
+            "status": self.status,
             "contractType": self.contract_type,
             "salary": self.salary,
             "availablePositions": self.available_positions,

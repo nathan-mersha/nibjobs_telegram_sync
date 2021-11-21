@@ -122,6 +122,7 @@ class JobChannelMethods:
             id=job_id,
             title=self.extract_job_title(message=message),
             category=self.extract_job_category(message=message),
+            status="closed" if self.is_job_closed(message=message) is True else "opened",
             contract_type=self.extract_job_contract_type(message=message),
             salary=self.extract_job_salary(message=message),
             available_positions=self.extract_job_available_positions(message=message),
