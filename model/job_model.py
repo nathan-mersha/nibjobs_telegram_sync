@@ -6,6 +6,8 @@ from typing import Optional
 
 class JobModel(BaseModel):
     id: str
+    telegram_channel_id: str
+    telegram_post_id: str
     title: str
     category: str  # job category like, accountant, software developer
     status: Optional[str] = "closed" # job status - closed, opened
@@ -28,6 +30,8 @@ class JobModel(BaseModel):
     def to_model(job_channel_json):
         return JobModel(
             id=job_channel_json["id"],
+            telegram_channel_id=job_channel_json["telegramChannelId"],
+            telegram_post_id=job_channel_json["telegram_post_id"],
             title=job_channel_json["title"],
             category=job_channel_json["category"],
             status=job_channel_json["status"],
@@ -50,6 +54,8 @@ class JobModel(BaseModel):
     def to_json(self):
         load = {
             "id": self.id,
+            "telegramChannelId": self.telegram_channel_id,
+            "telegramPostId": self.telegram_post_id,
             "title": self.title,
             "category": self.category,
             "status": self.status,

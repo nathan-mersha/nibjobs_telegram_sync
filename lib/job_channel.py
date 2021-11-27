@@ -117,9 +117,15 @@ class JobChannelMethods:
 
     # extracts the  product from the message,
     # note returned product data does not have image reference and Id
-    def extract_job(self, message: str, job_id: str, posted_date: str):
+    def extract_job(self, post, job_id: str):
+        message = post.message
+        post_id = post.id
+        posted_date = str(parser.parse(str(post.date)).isoformat())
+        channel_id = post.peer_id.channel_id
         job = JobModel(
             id=job_id,
+            telegram_channel_id=channel_id,
+            telegram_post_id=post_id,
             title=self.extract_job_title(message=message),
             category=self.extract_job_category(message=message),
             status="closed" if self.is_job_closed(message=message) is True else "opened",
@@ -211,7 +217,7 @@ class JobChannelMethods:
 
                     # job does not exist inside firebase
                     if len(result) == 0:  # creating job
-                        job = self.extract_job(message=post.message, job_id=job_id, posted_date=str(parser.parse(str(post.date)).isoformat()))
+                        job = self.extract_job(post=post, job_id=job_id)
 
                         self.firebase_crud.create_job(job=job)
 

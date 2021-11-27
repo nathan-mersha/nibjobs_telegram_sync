@@ -11,6 +11,11 @@ ts = TypeSenseAPI()
 sys_info = SystemInfo()
 
 
+@app.get("/server/system_info")
+def get_system_info():
+    return sys_info.get_info()
+
+
 @app.post("/server/ts/index/product")
 def index_product(product: dict):
     return ts.index_product(product)

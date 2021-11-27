@@ -40,6 +40,7 @@ class GetTelegramChannel:
             )
             print(posts)
             print(posts.messages[0].reply_markup.rows[0].buttons[0].url)
+            # print(posts.messages[0])
             return posts
 
         except Exception as e:
