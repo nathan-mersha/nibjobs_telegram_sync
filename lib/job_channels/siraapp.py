@@ -42,14 +42,8 @@ class SiraApp(JobChannelMethods):
         return 1
 
     def extract_job_description(self, message: str):
-        reg = re.compile('.*?description:(.*)', re.DOTALL)
-        matches = reg.findall(message.lower())
-        return matches[0]\
+        return message.lower()\
             .replace("description:", "")\
-            .replace("from: @freelance_ethio", "")\
-            .replace("#business_services", "")\
-            .replace("#creative_design", "")\
-            .replace("#other", "")\
             .replace("#software", "")\
             .strip()
 
