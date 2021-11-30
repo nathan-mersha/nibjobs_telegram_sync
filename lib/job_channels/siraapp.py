@@ -4,7 +4,7 @@ import re
 
 
 class SiraApp(JobChannelMethods):
-    job_channel_id = "ViMBcfsabqDk3WSNLc8R"
+    job_channel_id = "ZwfexgBZaKeZ38jJ8Eth"
 
     # returns true if the message is a "product post" type post, false other wise
     def is_post_job(self, message: str):
