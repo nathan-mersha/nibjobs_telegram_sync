@@ -44,7 +44,14 @@ class FreeLanceEthiopia(JobChannelMethods):
     def extract_job_description(self, message: str):
         reg = re.compile('.*?description:(.*)', re.DOTALL)
         matches = reg.findall(message.lower())
-        return matches[0].replace("description:", "").strip()
+        return matches[0]\
+            .replace("description:", "")\
+            .replace("from: @freelance_ethio", "")\
+            .replace("#business_services", "")\
+            .replace("#creative_design", "")\
+            .replace("#other", "")\
+            .replace("#software", "")\
+            .strip()
 
     def extract_job_apply_via(self, message: str):
         return "telegram"
