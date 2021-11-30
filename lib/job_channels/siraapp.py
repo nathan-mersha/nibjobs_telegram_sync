@@ -22,7 +22,7 @@ class SiraApp(JobChannelMethods):
         matches = re.findall('type  : .*', message.lower())
         if len(matches) == 0:
             return "unAvailable"
-        return matches[0].replace("type", "").strip()
+        return matches[0].replace("type", "").replace(":", "").strip()
 
     def extract_job_salary(self, message: str):
         salary = "unAvailable"
