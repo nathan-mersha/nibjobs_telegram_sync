@@ -67,7 +67,7 @@ class SiraApp(JobChannelMethods):
         return self.job_channel
 
     def extract_job_status_approved(self, message: str):
-        return True
+        return False
 
     def extract_job_status_deleted(self, message: str):
         return False
