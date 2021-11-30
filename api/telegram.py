@@ -12,7 +12,7 @@ class TelegramChannel:
     MIN_ID = 0
     ADD_OFFSET = 0
     HASH = 0
-    LIMIT = 100
+    LIMIT = 30 # todo : change to 100
 
     def __init__(self):
         # Reading Configs
