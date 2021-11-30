@@ -3,6 +3,7 @@ from lib.job_channels.freelance_ethiopia import FreeLanceEthiopia
 import traceback
 import datetime
 
+from lib.job_channels.hahujobs import HaHuJobs
 from lib.job_channels.siraapp import SiraApp
 
 
@@ -11,6 +12,7 @@ class ShopScheduler:
     companies_sync_list = [
         FreeLanceEthiopia(),
         SiraApp(),
+        HaHuJobs(),
     ]
 
     @staticmethod
