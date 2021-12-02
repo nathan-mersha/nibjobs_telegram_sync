@@ -18,22 +18,29 @@ class JobInEthiopia(JobChannelMethods):
         return message.encode('ascii', 'ignore').decode('ascii')
 
     def extract_job_title(self, message: str):
-        message=self.deEmojify(message)
+        message = self.deEmojify(message)
         matches = re.findall('position: .*', message.lower())
-        title="unAvailable"
+        title = "unAvailable"
+
         if len(matches) > 0:
             title = matches[0].replace("position:", "").strip()
+
+        if title == "unAvailable":
+            matches = re.findall('job title: .*', message.lower())
+            if len(matches) > 0:
+                title = matches[0].replace("job title:", "").strip()
+
         return title.strip()
 
     def extract_job_contract_type(self, message: str):
-        message=self.deEmojify(message)
+        message = self.deEmojify(message)
         matches = re.findall('job type: .*', message.lower())
         if len(matches) == 0:
             return "unAvailable"
         return matches[0].replace("job type:", "").strip()
 
     def extract_job_salary(self, message: str):
-        message=self.deEmojify(message)
+        message = self.deEmojify(message)
         salary = "unAvailable"
         matches = re.findall('salary: .*', message.lower())
         if len(matches) > 0:
@@ -51,7 +58,7 @@ class JobInEthiopia(JobChannelMethods):
         return 1
 
     def extract_job_description(self, message: str):
-        message=self.deEmojify(message)
+        message = self.deEmojify(message)
         return message.lower() \
             .replace("https://t.me/jobs_in_inter", "") \
             .replace("for more jobs  join", "") \
@@ -72,7 +79,7 @@ class JobInEthiopia(JobChannelMethods):
 
     def extract_job_company(self, message: str):
         message = self.deEmojify(message)
-        return CompanyModel(name=message.partition('\n')[1].strip().replace("#",""), verified=False)
+        return CompanyModel(name=message.partition('\n')[1].strip().replace("#", ""), verified=False)
 
     def extract_job_channel(self, message: str):
         return self.job_channel
