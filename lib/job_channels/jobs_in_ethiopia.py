@@ -19,10 +19,10 @@ class JobInEthiopia(JobChannelMethods):
 
     def extract_job_title(self, message: str):
         message=self.deEmojify(message)
-        matches = re.findall('job title: .*', message.lower())
+        matches = re.findall('position: .*', message.lower())
         title="unAvailable"
         if len(matches) > 0:
-            title = matches[0].replace("job title:", "").strip()
+            title = matches[0].replace("position:", "").strip()
         return title.strip()
 
     def extract_job_contract_type(self, message: str):
