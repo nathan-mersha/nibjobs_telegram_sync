@@ -1,9 +1,17 @@
 from lib.global_constants import telegram_bot
+from lib.job_channels.ElelanJobs_com import ElelanJobs
+from lib.job_channels.EthionlineJobs import EthoOnlineJobs
+from lib.job_channels.ethio_job_vacancy import EthioJobVacancy
+from lib.job_channels.ethiopageComJob import EthiopiaComJob
+from lib.job_channels.ethiopian_vacancy import EthiopianVacancy
 from lib.job_channels.freelance_ethiopia import FreeLanceEthiopia
 import traceback
 import datetime
 
 from lib.job_channels.hahujobs import HaHuJobs
+from lib.job_channels.jobs_in_ethiopia import JobInEthiopia
+from lib.job_channels.ngo_job_vacancy import NgoJobVacancy
+from lib.job_channels.post_vacancy import PostVacancy
 from lib.job_channels.siraapp import SiraApp
 
 
@@ -13,6 +21,14 @@ class ShopScheduler:
         FreeLanceEthiopia(),
         SiraApp(),
         HaHuJobs(),
+        EthiopiaComJob(),
+        EthoOnlineJobs(),
+        EthiopianVacancy(),
+        EthioJobVacancy(),
+        PostVacancy(),
+        NgoJobVacancy(),
+        JobInEthiopia(),
+        ElelanJobs(),
     ]
 
     @staticmethod

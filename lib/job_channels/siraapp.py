@@ -48,7 +48,7 @@ class SiraApp(JobChannelMethods):
             .strip()
 
     def extract_job_apply_via(self, message: str):
-        return "telegram"
+        return "link"
 
     def extract_job_apply_link(self, message: str):
         return self.post.reply_markup.rows[0].buttons[0].url
