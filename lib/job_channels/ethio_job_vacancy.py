@@ -68,7 +68,10 @@ class EthioJobVacancy(JobChannelMethods):
 
     def extract_job_company(self, message: str):
         message = self.deEmojify(message)
-        return CompanyModel(name=message.partition('\n')[1].strip().replace("#",""), verified=False)
+        title = message.partition('\n')[1].strip().replace("#", "")
+        if title == "":
+            return CompanyModel(name="unAvailable", verified=False)
+        return CompanyModel(name=title, verified=False)
 
     def extract_job_channel(self, message: str):
         return self.job_channel
