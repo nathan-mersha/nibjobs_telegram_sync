@@ -7,9 +7,9 @@ class TypeSenseAPI:
     def __init__(self):
 
         self.client = typesense.Client({
-            'api_key': 'GpffZbKsgNu2UrhfR3NQpfoMTMUAZSWRPMUZNjglX2i7U90r',
+            'api_key': 'gSBSha05QBxPQwDLGIr8G8A7S8ZLIWbZQcgpykyQASNRK8Ns',
             'nodes': [{
-                'host': '178.62.83.84',
+                'host': '46.101.84.178',
                 'port': '8108',
                 'protocol': 'http'
             }],
@@ -18,41 +18,21 @@ class TypeSenseAPI:
 
         try:
             self.client.collections.create({
-                "name": "product",
+                "name": "job",
                 "fields": [
-                    {"name": "name", "type": "string"},
-                    {"name": "category", "type": "string"},
-                    {"name": "subCategory", "type": "string"},
-                    {"name": "tag", "type": "string"},
-                    {"name": "authorOrManufacturer", "type": "string"},
-
+                    {"name": "title", "type": "string"},
                 ],
             })
         except Exception as e:
             print(e)
 
-        try:
-            self.client.collections.create({
-                "name": "shop",
-                "fields": [
-                    {"name": "name", "type": "string"},
-                    {"name": "description", "type": "string"},
-                ],
-            })
-        except Exception as e:
-            print(e)
 
-    def index_product(self, product: dict):
+    def index_job(self, product: dict):
         try:
-            return self.client.collections["product"].documents.create(product)
+            return self.client.collections["job"].documents.create(product)
         except ObjectAlreadyExists as e:
-            return self.client.collections['product'].documents.update(product)
+            return self.client.collections['job'].documents.update(product)
 
-    def index_shop(self, shop: dict):
-        try:
-            return self.client.collections['shop'].documents.create(shop)
-        except ObjectAlreadyExists as e:
-            return self.client.collections['shop'].documents.update(shop)
 
     def search_data(self, document: str, fields: str, query: str):
         search_parameters = {
