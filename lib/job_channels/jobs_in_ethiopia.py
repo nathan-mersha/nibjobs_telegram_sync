@@ -58,15 +58,7 @@ class JobInEthiopia(JobChannelMethods):
         return 1
 
     def extract_job_description(self, message: str):
-        message = self.deEmojify(message)
-        return message.lower() \
-            .replace("https://t.me/jobs_in_inter", "") \
-            .replace("for more jobs  join", "") \
-            .replace("ሌሎች ስራ መረጃዎችን ለማግኘት ይህንን ሊንክ ይጫኑት", "") \
-            .replace("https://t.me/joinchat/AAAAAErPpgYpd5Yl8CBg8g", "") \
-            .replace("#other", "") \
-            .replace("#software", "") \
-            .strip()
+        return message
 
     def extract_job_apply_via(self, message: str):
         return "link"

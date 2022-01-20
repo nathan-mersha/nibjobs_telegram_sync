@@ -41,14 +41,7 @@ class HaHuJobs(JobChannelMethods):
         return 1
 
     def extract_job_description(self, message: str):
-        return message.lower()\
-            .replace("@hahujobs @hahujobs_bot", "")\
-            .replace("@hahujobs", "")\
-            .replace("@hahujobs_bot", "")\
-            .replace("#creative_design", "")\
-            .replace("#other", "")\
-            .replace("#software", "")\
-            .strip()
+        return message
 
     def extract_job_apply_via(self, message: str):
         return "link"
