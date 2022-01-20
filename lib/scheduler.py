@@ -21,14 +21,14 @@ class ShopScheduler:
         FreeLanceEthiopia(),
         SiraApp(),
         HaHuJobs(),
-        EthiopiaComJob(),
-        EthoOnlineJobs(),
-        EthiopianVacancy(),
-        EthioJobVacancy(),
-        PostVacancy(),
-        NgoJobVacancy(),
-        JobInEthiopia(),
-        ElelanJobs(),
+        # EthiopiaComJob(),
+        # EthoOnlineJobs(),
+        # EthiopianVacancy(),
+        # EthioJobVacancy(),
+        # PostVacancy(),
+        # NgoJobVacancy(),
+        # JobInEthiopia(),
+        # ElelanJobs(),
     ]
 
     @staticmethod
