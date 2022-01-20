@@ -18,17 +18,17 @@ from lib.job_channels.siraapp import SiraApp
 class ShopScheduler:
     # todo : add job_channels here
     companies_sync_list = [
-        # FreeLanceEthiopia(),
-        # SiraApp(),
-        # HaHuJobs(),
-        # EthiopiaComJob(),
-        # EthoOnlineJobs(),
-        # EthiopianVacancy(),
-        # EthioJobVacancy(),
-        # PostVacancy(),
-        # NgoJobVacancy(),
-         JobInEthiopia(),
-        # ElelanJobs(),
+        FreeLanceEthiopia(),
+        SiraApp(),
+        HaHuJobs(),
+        EthiopiaComJob(),
+        EthoOnlineJobs(),
+        EthiopianVacancy(),
+        EthioJobVacancy(),
+        PostVacancy(),
+        NgoJobVacancy(),
+        JobInEthiopia(),
+        ElelanJobs(),
     ]
 
     @staticmethod
