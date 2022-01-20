@@ -60,11 +60,6 @@ class EthiopianVacancy(JobChannelMethods):
     def extract_job_apply_via(self, message: str):
         return "link"
 
-    def extract_job_apply_link(self, message: str):
-        if self.post.reply_markup != None:
-            return self.post.reply_markup.rows[0].buttons[0].url
-        else:
-            return "unAvailable"
     def extract_job_company(self, message: str):
         message = self.deEmojify(message)
         title = message.partition('\n')[1].strip().replace("#", "")

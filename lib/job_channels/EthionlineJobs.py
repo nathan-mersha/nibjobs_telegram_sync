@@ -60,9 +60,6 @@ class EthoOnlineJobs(JobChannelMethods):
     def extract_job_apply_via(self, message: str):
         return "link"
 
-    def extract_job_apply_link(self, message: str):
-        return self.post.reply_markup.rows[0].buttons[0].url
-
     def extract_job_company(self, message: str):
         name = "unAvailable"
         matches = re.findall('job by: .*', message.lower())

@@ -100,8 +100,10 @@ class JobChannelMethods:
     def extract_job_apply_via(self, message: str):
         pass
 
-    def extract_job_apply_link(self, message: str):
-        pass
+    def extract_job_apply_link(self, post):
+        job_link = self.job_channel.link
+        post_link = f'{job_link}/{str(post.id)}'
+        return post_link
 
     def extract_job_company(self, message: str):
         pass
@@ -135,7 +137,7 @@ class JobChannelMethods:
             tags=self.extract_job_tag(message=message),
             description=self.extract_job_description(message=message),
             apply_via=self.extract_job_apply_via(message=message),
-            apply_link=self.extract_job_apply_link(message=message),
+            apply_link=self.extract_job_apply_link(post),
             company=self.extract_job_company(message=message),
             job_channel=self.extract_job_channel(message=message),
             approved=self.extract_job_status_approved(message=message),
@@ -218,11 +220,8 @@ class JobChannelMethods:
                     # job does not exist inside firebase
                     if len(result) == 0:  # creating job
                         job = self.extract_job(post=post, job_id=job_id)
-
                         self.firebase_crud.create_job(job=job)
-
                         return JobChannelMethods.created
-
                     else:
                         # todo : update job here
                         # compare previous message with the new one and if there is a change reflect
