@@ -34,26 +34,20 @@ class ShopScheduler:
     @staticmethod
     def sync_job_channels():
         begin = datetime.datetime.now()
-        telegram_bot.notify_sync_bot("starting sync script")
+        # telegram_bot.notify_sync_bot("starting sync script")
 
         # iterating through the above defined shop lists to sync product
         for shop in ShopScheduler.companies_sync_list:
             shop.sync_jobs()
-            # try:
-            #     shop.sync_jobs()
-            # except Exception as e:
-            #     print(e)
-            #     telegram_bot.notify_sync_bot(
-            #         "----- Error On Sync {} ------ \n Something Went wrong while syncing : \n {} \n ----- Error End ------".format("a",
-            #                                                                                                                     str(traceback.format_exc())))
+            
         end = datetime.datetime.now()
         diff = end - begin
-        telegram_bot.notify_sync_bot("completed sync script took {} sec".format(diff.seconds))
+        telegram_bot.notify_sync_bot("Completed NibJobs Sync, Begin approval. Took {} sec".format(diff.seconds))
 
     @staticmethod
     def sync_shop(shop_id: str):
         begin = datetime.datetime.now()
-        telegram_bot.notify_sync_bot("starting sync script")
+        # telegram_bot.notify_sync_bot("starting sync script")
 
         # iterating through the above defined shop lists to sync product
 
@@ -64,4 +58,4 @@ class ShopScheduler:
 
         end = datetime.datetime.now()
         diff = end - begin
-        telegram_bot.notify_sync_bot("completed sync script took {} sec".format(diff.seconds))
+        # telegram_bot.notify_sync_bot("Completed NibJobs Sync, Begin approval. Took {} sec".format(diff.seconds))

@@ -199,7 +199,7 @@ class JobChannelMethods:
         self.errored_msg.clear()
         self.not_job_post_msg.clear()
 
-        telegram_bot.notify_sync_bot(str_report)
+        # telegram_bot.notify_sync_bot(str_report)
         return report
 
     def sync_job(self, post):
