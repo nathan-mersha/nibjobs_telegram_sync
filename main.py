@@ -10,11 +10,6 @@ def main():
     print("starting sync script")
     ShopScheduler.sync_job_channels()
     print("done running sync script")
-
-    # to populate mobile cards
-    # mobile_cards_populate = MobileCardPopulate()
-    # mobile_cards_populate.populate()
-
     os._exit(0)
 
 

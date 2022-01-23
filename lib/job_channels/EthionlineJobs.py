@@ -4,7 +4,7 @@ import re
 
 
 class EthoOnlineJobs(JobChannelMethods):
-    job_channel_id = "VH9j5cOQb4J4nmiOiTxe"
+    job_channel_id = "MZ3cQ7zRxPnYs10sIlJh"
 
     # returns true if the message is a "product post" type post, false other wise
     def is_post_job(self, message: str):

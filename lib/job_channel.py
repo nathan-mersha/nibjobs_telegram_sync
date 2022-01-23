@@ -1,12 +1,8 @@
-import time
-import uuid
 from lib.global_constants import *
+import time
 from model.job_channel_model import JobChannelModel
-import os
 from model.job_model import JobModel
 from dateutil import parser
-
-from datetime import datetime
 
 
 class JobChannelMethods:
@@ -151,56 +147,12 @@ class JobChannelMethods:
 
     # sync products to firebase
     def sync_jobs(self):
-        report = {
-            JobChannelMethods.created: 0,
-            JobChannelMethods.updated: 0,
-            JobChannelMethods.removed: 0,
-            JobChannelMethods.ignored: 0,
-            JobChannelMethods.errored: 0,
-            JobChannelMethods.not_job_post: 0,
-            JobChannelMethods.total_analyzed: 0,
-        }
         posts = self.telegram_channel.get_posts(shop_telegram_channel=self.job_channel.link)
         for post in posts:
             # wait for 100 milli seconds before initiating the next call
             time.sleep(0.1)
-            sync_type = self.sync_job(post)
-            report[sync_type] += 1
-        report[JobChannelMethods.total_analyzed] = report[JobChannelMethods.created] + report[JobChannelMethods.removed] + report[
-            JobChannelMethods.updated] + report[
-                                                       JobChannelMethods.ignored] + report[JobChannelMethods.errored] + report[
-                                                       JobChannelMethods.not_job_post]
-
-        now_date_time = str(datetime.now().ctime())
-
-        str_report = "{}\n{}\n\nj_created   -> {}\nj_updated  -> {}\nj_removed -> {}\nj_ignored   -> {}\nj_errored   -> " \
-                     "{}\nnot_job_post   -> {}\nj_analyzed -> {}\n\n{} \n\n ------ errors begin ------ {} " \
-                     "------ errors end ------ \n\n ------ not created begin ------ {} ------ not created end ------".format(
-            self.job_channel.name,
-            35 * "-", report[
-                JobChannelMethods.created],
-            report[
-                JobChannelMethods.updated],
-            report[
-                JobChannelMethods.removed],
-            report[
-                JobChannelMethods.ignored],
-            report[
-                JobChannelMethods.errored],
-            report[
-                JobChannelMethods.not_job_post],
-            report[
-                JobChannelMethods.total_analyzed],
-            now_date_time,
-            "\n".join(self.errored_msg)[:1000],
-            "\n".join(self.not_job_post_msg)[:1000]
-        )
-
-        self.errored_msg.clear()
-        self.not_job_post_msg.clear()
-
-        # telegram_bot.notify_sync_bot(str_report)
-        return report
+            self.sync_job(post) 
+        return
 
     def sync_job(self, post):
         self.post = post

@@ -1,13 +1,11 @@
-from lib.global_constants import telegram_bot
-from lib.job_channels.ElelanJobs_com import ElelanJobs
-from lib.job_channels.EthionlineJobs import EthoOnlineJobs
-from lib.job_channels.ethio_job_vacancy import EthioJobVacancy
-from lib.job_channels.ethiopageComJob import EthiopiaComJob
-from lib.job_channels.ethiopian_vacancy import EthiopianVacancy
-from lib.job_channels.freelance_ethiopia import FreeLanceEthiopia
-import traceback
 import datetime
 
+from lib.global_constants import telegram_bot
+
+from lib.job_channels.EthionlineJobs import EthoOnlineJobs
+from lib.job_channels.ethio_job_vacancy import EthioJobVacancy
+from lib.job_channels.ethiopian_vacancy import EthiopianVacancy
+from lib.job_channels.freelance_ethiopia import FreeLanceEthiopia
 from lib.job_channels.hahujobs import HaHuJobs
 from lib.job_channels.jobs_in_ethiopia import JobInEthiopia
 from lib.job_channels.ngo_job_vacancy import NgoJobVacancy
@@ -21,22 +19,18 @@ class ShopScheduler:
         FreeLanceEthiopia(),
         SiraApp(),
         HaHuJobs(),
-        # EthiopiaComJob(),
         EthoOnlineJobs(),
         EthiopianVacancy(),
         EthioJobVacancy(),
         PostVacancy(),
         NgoJobVacancy(),
         JobInEthiopia(),
-        # ElelanJobs(),
     ]
 
     @staticmethod
     def sync_job_channels():
         begin = datetime.datetime.now()
-        # telegram_bot.notify_sync_bot("starting sync script")
-
-        # iterating through the above defined shop lists to sync product
+    
         for shop in ShopScheduler.companies_sync_list:
             shop.sync_jobs()
             
@@ -44,18 +38,3 @@ class ShopScheduler:
         diff = end - begin
         telegram_bot.notify_sync_bot("Completed NibJobs Sync, Begin approval. Took {} sec".format(diff.seconds))
 
-    @staticmethod
-    def sync_shop(shop_id: str):
-        begin = datetime.datetime.now()
-        # telegram_bot.notify_sync_bot("starting sync script")
-
-        # iterating through the above defined shop lists to sync product
-
-        for shop in ShopScheduler.companies_sync_list:
-            if shop.shop_id == shop_id:
-                shop.sync_products()
-                return
-
-        end = datetime.datetime.now()
-        diff = end - begin
-        # telegram_bot.notify_sync_bot("Completed NibJobs Sync, Begin approval. Took {} sec".format(diff.seconds))

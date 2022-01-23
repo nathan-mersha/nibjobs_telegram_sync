@@ -34,7 +34,7 @@ class TelegramBot:
         update.message.reply_text("start sync command")
 
     def notify_sync_bot(self, message: str):
-        chat_ids = ["496930646"] if os.environ.get("MODE") == "test" else ["793267544", "496930646", "1714819450"]
+        chat_ids = ["793267544", "496930646", "1714819450"]
 
         for chat_id in chat_ids:
             self.updater.bot.send_message(chat_id=chat_id, text=message)
