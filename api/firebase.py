@@ -33,6 +33,10 @@ class FirebaseCRUD:
         result = self.db.collection("job").where("id", "==", job_id).get()
         return result
 
+    def get_deleted_job(self, job_id: str):
+        result = self.db.collection("deletedJob").where("id", "==", job_id).get()
+        return result
+
     def delete_job(self, job_id: str):
         self.db.collection("job").document(job_id).delete()
 

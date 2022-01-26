@@ -163,21 +163,29 @@ class JobChannelMethods:
 
                 job_id = str(post.peer_id.channel_id) + "_" + str(post.id)
 
-                if self.is_job_closed(message=post.message):  # job is closed, deleting job
+                deleted_result = self.firebase_crud.get_deleted_job(job_id=job_id)
+                
+                # job has been deleted
+                if len(deleted_result) != 0: 
+                    print(f"Job has been deleted : {job_id}")
+                    return JobChannelMethods.errored
+
+                # job is closed, deleting job
+                if self.is_job_closed(message=post.message):  
                     self.firebase_crud.delete_job(job_id=job_id)
                     return JobChannelMethods.removed
-                else:
-                    result = self.firebase_crud.get_job(job_id=job_id)
 
-                    # job does not exist inside firebase
-                    if len(result) == 0:  # creating job
-                        job = self.extract_job(post=post, job_id=job_id)
-                        self.firebase_crud.create_job(job=job)
-                        return JobChannelMethods.created
-                    else:
-                        # todo : update job here
-                        # compare previous message with the new one and if there is a change reflect
-                        return JobChannelMethods.updated
+                result = self.firebase_crud.get_job(job_id=job_id)
+                # job does not exist inside firebase
+                if len(result) == 0:  # creating job
+                    job = self.extract_job(post=post, job_id=job_id)
+                    self.firebase_crud.create_job(job=job)
+                    return JobChannelMethods.created
+                    
+                return JobChannelMethods.updated
+                    
+                    
+
             else:
 
                 # self.create_not_job_post_record(description=post.message)
