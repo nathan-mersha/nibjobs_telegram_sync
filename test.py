@@ -1,5 +1,6 @@
+from turtle import clear
 from api.firebase import FirebaseCRUD
-
+import csv
 # tags are something the user will follow
 # keywords are something we will use to categorize that post
 
@@ -27,189 +28,15 @@ from api.firebase import FirebaseCRUD
 # NOTE :  tags are visible to users and are followed, keywords are used only internally
 firebase_crud = FirebaseCRUD()
 global_config = firebase_crud.get_global_config()
+categories = global_config["categories"]
 
-categories = [
-    {
-        "icon": "some icon",
-        "name": "architecture and engineering",
-        "tags": [
-            "mechanical",
-            "Technician",
-            "biomedical",
-            "Electrical",
-            "architecture",
-            "network",
-            "Revit",
-            "AutoCAD",
-            "industrial",
-            "garment engineering",
-            "textile engineering",
-            "hardware engineering"
-        ],
+with open('categories.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+    cat = []
+    for category in categories:
+        cat.append(category["name"])
 
-    },
+    writer.writerow(cat)
 
-    {
-        "icon": "some icon",
-        "name": "graphics",
-        "tags": [
-            "adobe",
-            "illustrator",
-            "after effect",
-            "davinci resolve",
-            "photoshop",
-            "photographer",
-            "designer",
-            "creative_design",
-            "production manager"
-        ],
-
-    },
-
-    {
-        "icon": "some icon",
-        "name": "business & administration",
-        "tags": [
-            "manager",
-            "distribution manager",
-            "human resource manager",
-            "Marketing",
-            "customer relation",
-            "administrator",
-            "Accountant",
-            "Director",
-            "Purchaser",
-            "finance",
-            "Assistant",
-            "Driver Supervisor",
-            "Secretary",
-            "business_services",
-            "store keeper",
-            "project management"
-        ],
-    },
-
-    {
-        "icon": "some icon",
-        "name": "education",
-        "tags": [
-            "tutor",
-            "Dean",
-            "Teacher",
-            "instructor",
-            "education officer"
-        ],
-    },
-
-    {
-        "icon": "some icon",
-        "name": "service & maintenance",
-        "tags": [
-            "Waiter",
-            "Cashier",
-            "Coach",
-            "Driver",
-            "Receptionist",
-            "Chef",
-            "Agent",
-            "Translator",
-            "Content writer",
-            "writer",
-            "trainer",
-            "Interpreter",
-            "Office Manager",
-            "coordinator",
-            "promoter",
-            "Customer Support",
-            "transcriptionist",
-            "social media booster",
-            "cook",
-            "guard"
-        ],
-
-    },
-
-    {
-        "icon": "some icon",
-        "name": "health & medicine",
-        "tags": [
-            "Nurse",
-        ],
-    },
-
-    {
-        "icon": "some icon",
-        "name": "sales",
-        "tags": [
-            "sales",
-            "business_services",
-            "customer support"
-        ],
-    },
-
-    {
-        "icon": "some icon",
-        "name": "Software Engineering",
-        "tags": [
-            "seo",
-            "html",
-            "Java",
-            "Python",
-            "C++",
-            "C#",
-            "Assembly language",
-            "ios",
-            "Groovy",
-            "Angular",
-            "React",
-            "Data analyst",
-            "Vue.js",
-            "Ember.js",
-            "Front-end",
-            "AWS",
-            "Boto3",
-            "Full stack",
-            "back-end",
-            "WordPress",
-            "Flutter",
-            "dart",
-            "Scss/Sass",
-            "Meteor",
-            "Node.js",
-            "next.js",
-            "Backbone.js",
-            "SQL",
-            "PHP",
-            "Visual Basic",
-            "css",
-            "onion",
-            "Oracle",
-            "APEX",
-            "javascript",
-            "bootstrap",
-            "Blockchain",
-            "php",
-            "MERN",
-            "hacker",
-            "Laravel",
-            "IT Support",
-            "ethereum",
-            "solana",
-            "avalanche",
-            "cardano"
-        ],
-
-    },
-
-]
-
-# clean up
-for category in categories:
-    category["name"] = category["name"].lower()
-    for t in category["tags"]:
-        index = category["tags"].index(t)
-        category["tags"][index] = t.lower().replace("-"," ").replace("_", " ")
-    category["tags"] = list(set(category["tags"]))
-
-global_config["categories"] = categories
-firebase_crud.update_global_config(global_config=global_config)
+    for category in categories:
+        writer.writerow(category["tags"])
