@@ -27,8 +27,11 @@ class FirebaseCRUD:
             print("no shop found by id : ", shop_id)
 
     def create_job(self, job: JobModel):
-        if len(job.tags) >= 3:
+        if len(job.tags) >= 2:
             job.approved = True
+        elif job.category=="health & medicine" or job.category=="architecture and engineering" or job.category=="business & administration" or job.category=="education":
+            job.approved = True
+
         self.job_ref.document(job.id).set(job.to_json())
 
     def get_job(self, job_id: str):
